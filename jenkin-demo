@@ -7,33 +7,35 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/your-repo/terraform.git'
-            }
-        }
-
         stage('Terraform Init') {
             steps {
-                bat 'terraform init'
+                dir('jenkin-demo') {
+                    sh 'terraform init'
+                }
             }
         }
 
         stage('Terraform Validate') {
             steps {
-                bat 'terraform validate'
+                dir('jenkin-demo') {
+                    sh 'terraform validate'
+                }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                bat 'terraform plan'
+                dir('jenkin-demo') {
+                    sh 'terraform plan'
+                }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                bat 'terraform apply -auto-approve'
+                dir('jenkin-demo') {
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
     }
